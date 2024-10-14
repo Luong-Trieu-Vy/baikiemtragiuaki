@@ -1,0 +1,42 @@
+-- Tạo cơ sở dữ liệu QLSanpham
+CREATE DATABASE QLSanpham;
+GO
+
+-- Sử dụng cơ sở dữ liệu QLSanpham
+USE QLSanpham;
+GO
+
+-- Tạo bảng LoaiSP
+CREATE TABLE LoaiSP (
+    MaLoai CHAR(2) PRIMARY KEY,
+    TenLoai NVARCHAR(30) NOT NULL
+);
+GO
+
+-- Tạo bảng Sanpham
+CREATE TABLE Sanpham (
+    MaSP CHAR(6) PRIMARY KEY,
+    TenSP NVARCHAR(30) NOT NULL,
+    Ngaynhap DATETIME NOT NULL,
+    MaLoai CHAR(2) FOREIGN KEY REFERENCES LoaiSP(MaLoai)
+);
+GO
+
+-- Nhập dữ liệu cho bảng LoaiSP
+INSERT INTO LoaiSP (MaLoai, TenLoai) VALUES
+('01', N'Điện tử'),
+('02', N'Thời trang'),
+('03', N'Thực phẩm');
+GO
+
+-- Nhập dữ liệu cho bảng Sanpham
+INSERT INTO Sanpham (MaSP, TenSP, Ngaynhap, MaLoai) VALUES
+('SP001', N'Điện thoại', '2024-10-14 03:37:00', '01'),
+('SP002', N'Áo khoác', '2024-11-01 15:45:00', '02'),
+('SP003', N'Bánh kẹo', '2024-12-25 12:00:00', '03');
+GO
+
+-- Kiểm tra dữ liệu đã nhập
+SELECT * FROM Sanpham;
+SELECT * FROM LoaiSP;
+GO
